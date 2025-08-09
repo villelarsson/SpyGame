@@ -6,6 +6,7 @@ st.title("🕵️ Spy Game")
 
 # Hårdkodad ordlista (Göteborgs ord)
 word_list = [
+    # Platser och områden
     "Avenyn", "Linnéplatsen", "Kungsportsplatsen", "Slottsskogen", "Göta älv",
     "Feskekôrka", "Liseberg", "Skansen Kronan", "Masthuggskyrkan", "Nordstan",
     "Chalmers", "Haga", "Röda Sten", "Älvsborgsbron", "Kungsgatan",
@@ -19,28 +20,53 @@ word_list = [
     "Göteborgs Stadsmuseum", "Heden", "Skandia Teatern", "Vinga", "Kortedala",
     "Tuve", "Länsmansgården", "Röda Sten Konsthall", "Gunnebo Slott",
     "Bohus fästning", "Sven-Harrys Konstmuseum", "Volvo Torslanda",
-    "Göteborgs Universitet", "Kronhuset", "Nefertiti", "Masthugget",
-    "Mölndalsån", "Göta älvbron", "Kajskjul",
-    # Kända göteborgare / legendarer
-    "Leif Loket Olsson", "Håkan Hellström", "Zlatan Ibrahimović", "Lotta Schelin",
-    "Ingemar Johansson", "Jan Johansson", "Bengt Ekerot", "Gösta Ekman",
-    "Peter Forsberg", "Annika Sörenstam", "Gunnar Gren", "Henrik Lundqvist",
-    "Lars Winnerbäck", "Greta Garbo", "Torgny Segerstedt", "Alfred Nobel",
-    "Anders Celsius",
-    # Platser igen
-    "Göteborgs Konsthall", "Göteborgs Stadsteater", "Göteborgs Naturhistoriska Museum",
-    "Göteborgs Botaniska Trädgård", "Östra Hamngatan", "Södra Vägen", "Götaleden",
-    "Järntorget", "Skärgården", "Delsjöområdet", "Slottsberget", "Kvarnberget",
-    "Ruddalen", "Långedrag", "Västra Götaland", "Bohuslän", "Styrsö", "Donsö",
-    "Vrångö", "Brännö", "Kungälv", "Torslanda", "Säve", "Majvallen",
+    "Göteborgs Universitet", "Kronhuset", "Nefertiti", "Mölndalsån",
+    "Göta älvbron", "Kajskjul", "Göteborgs Konsthall", "Göteborgs Stadsteater",
+    "Göteborgs Naturhistoriska Museum", "Göteborgs Botaniska Trädgård",
+    "Östra Hamngatan", "Södra Vägen", "Götaleden", "Järntorget",
+    "Skärgården", "Delsjöområdet", "Slottsberget", "Kvarnberget",
+    "Ruddalen", "Långedrag", "Västra Götaland", "Bohuslän", "Styrsö",
+    "Donsö", "Vrångö", "Brännö", "Kungälv", "Torslanda", "Säve", "Majvallen",
     "Öckerö", "Hönö", "Vinga fyr", "Skagen", "Göteborgs Centralstation",
     "Nordstan", "Bohus fästning", "Göteborgs Hamn", "Nya Varvet",
     "Älvsborgs fästning", "Göteborgs Rådhus", "Chalmers Tekniska Högskola",
     "Göteborgs stadsbibliotek", "Göteborgs Konserthus", "Karl Johans Torg",
     "Skatås motionscentrum", "Röda Sten Kulturfabrik", "Kviberg",
-    "Gamla Ullevi", "Vasaplatsen", "Östra sjukhuset", "Linnéstaden",
-    "Guldheden", "Haga Nygata", "Järntorget", "Kvarteret Krukan",
-    "Göteborgsvarvet", "Volvo Museum"
+    "Vasaplatsen", "Östra sjukhuset", "Linnéstaden", "Guldheden",
+    "Haga Nygata", "Kvarteret Krukan", "Göteborgsvarvet", "Volvo Museum",
+    "Styrsö Skärgårdsgård", "Långedrags Värdshus", "Sjömagasinet",
+    "Göteborgs Konstmuseum", "Haga Kyrka", "Masthuggsbadet", "Saltholmen Färjeläge",
+    "Göteborgs Konserthus", "Backaplan Shoppingcenter", "Göteborgs Stadsmissions Second Hand",
+    "Trädgårdsföreningen", "Färjenäsparken", "Skärgårdsbåtarna", "Gamlestadstorget",
+    "Nordstan Shoppingcenter", "Majvallen Idrottsplats", "Ullevi Stadion",
+    "Gamla Ullevi Stadion", "Slottsskogen Djurpark",
+
+    # Kända personer
+    "Leif Loket Olsson", "Håkan Hellström", "Zlatan Ibrahimović",
+    "Lotta Schelin", "Ingemar Johansson", "Jan Johansson",
+    "Bengt Ekerot", "Gösta Ekman", "Peter Forsberg", "Annika Sörenstam",
+    "Gunnar Gren", "Henrik Lundqvist", "Lars Winnerbäck", "Greta Garbo",
+    "Torgny Segerstedt", "Alfred Nobel", "Anders Celsius", "Jan Troell",
+    "Lena Endre", "Björn Ranelid", "Mikael Persbrandt", "Josefin Nilsson",
+    "Evert Taube", "Sten Sture", "Maj Sjöwall", "Per Gessle",
+    "Camilla Läckberg", "Lasse Kronér", "Björn Borg", "Claes Malmberg",
+    "Magnus Uggla", "Lena Philipsson", "Olof Lundh",
+
+    # Fler platser och områden
+    "Södra Älvstranden", "Hisingsparken", "Krokslätt", "Brännö Rödsten",
+    "Kålltorpsskolan", "Lilla Torget", "Blå Stället", "Olivedal",
+    "Skärgårdsbåtsterminalen", "Färjenäs", "Annedal", "Guldhedens sjukhus",
+    "Långströmsgatan", "Majornas kyrka", "Vasaplatsens torg", "Östra kyrkogården",
+    "Lisebergsstationen", "Kvibergs marknad", "Färjenäsparken", "Hisingsbron",
+    "Gamla Teatern", "Lilla Bommen Piren", "Vasagatan", "Hagakyrkan",
+    "Kvarnberget lekplats", "Vallgraven", "Bältesspännarparken", "Feskeboa",
+    "Kongahälla", "Kvibergs kyrkogård", "Hisingsparken", "Skansen Lejonet",
+    "Folkets Park", "Mölndalsån", "Gårda", "Redbergsplatsen", "Majornas torg",
+    "Bergsjön", "Lindholmen Science Park", "Biskopsgården",
+    "Göteborgs Konstmuseums skulpturpark", "Norra Hamngatan", "Klippan",
+    "Säve Flygplats", "Eriksberg kaj", "Käringön", "Skärgårdsmuseet",
+    "Torslanda flygplats", "Mellbystrand", "Backaplan", "Sundspromenaden",
+    "Askimsbadet", "Kortedala centrum", "Lilla Edet", "Nya Varvet fästning"
 ]
 
 # --- SESSION STATE ---
@@ -120,5 +146,6 @@ elif st.session_state.step == "reveal":
             else:
                 st.success(f"Your word is: **{role}**")
             st.button("Next Player", on_click=next_player)
+
 
 
