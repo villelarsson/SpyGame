@@ -4,14 +4,26 @@ import random
 st.set_page_config(page_title="Spy Game", layout="centered")
 st.title("🕵️ Spy Game")
 
+# Hårdkodad ordlista (Göteborgs ord)
+word_list = [
+    "Sqwaren", "Bridge", "Linnsparken", "Gullmaren", "GoTento", "Gamtorget",
+    "Chalmers", "Fiskekortet", "Mastvindmarknaden", "Molinertwron", "Fiskbatang",
+    "Fisketwragen", "Liseberg", "Storagatan", "Marktall", "Slottsskogen",
+    "Frolindgen", "Kafebarken", "Valgravern", "Saluhall badmint", "Majorvegen",
+    "Kramerros", "Skivbacken", "Eldstalt", "Operahen", "Golemille", "Kontrkyn",
+    "Slottsskirkang", "Fisketpanna", "Avenkyrok", "Torslands", "stranda",
+    "Garden of ediles", "Slott-channel", "Nordic shipyard", "Kollestalt",
+    "Styrsoe", "Stickgort board", "Gatungeran", "Marktscener", "Halstahal gata",
+    "Skagen vic"
+]
+
+# --- SESSION STATE ---
 if "step" not in st.session_state:
     st.session_state.step = "setup"
 if "players" not in st.session_state:
     st.session_state.players = []
 if "num_players" not in st.session_state:
     st.session_state.num_players = 3
-if "word_list" not in st.session_state:
-    st.session_state.word_list = []
 if "assignments" not in st.session_state:
     st.session_state.assignments = []
 if "current_index" not in st.session_state:
@@ -22,7 +34,7 @@ if "show_role" not in st.session_state:
     st.session_state.show_role = False
 
 def start_game():
-    chosen_word = random.choice(st.session_state.word_list)
+    chosen_word = random.choice(word_list)
     spy_index = random.randint(0, len(st.session_state.players) - 1)
     st.session_state.assignments = [
         "Spy" if i == spy_index else chosen_word for i in range(len(st.session_state.players))
@@ -38,6 +50,7 @@ def next_player():
     st.session_state.show_role = False
 
 def restart_game():
+    # Behåll spelare och antal, nollställ allt annat
     for key in ["assignments", "current_index", "reveal_order", "show_role", "step"]:
         if key in st.session_state:
             del st.session_state[key]
@@ -45,9 +58,6 @@ def restart_game():
 
 # --- Setup step ---
 if st.session_state.step == "setup":
-    st.subheader("Add Words")
-    word_input = st.text_area("Enter one word per line", height=200)
-    words = [w.strip() for w in word_input.split("\n") if w.strip()]
     st.subheader("Enter Player Names")
     st.session_state.num_players = st.number_input("Number of players", min_value=3, step=1, value=st.session_state.num_players)
     player_names = []
@@ -57,12 +67,9 @@ if st.session_state.step == "setup":
         player_names.append(name)
 
     if st.button("Start Game"):
-        if len(words) == 0:
-            st.error("Please enter at least one word.")
-        elif "" in player_names:
+        if "" in player_names:
             st.error("Please fill in all player names.")
         else:
-            st.session_state.word_list = words
             st.session_state.players = player_names
             start_game()
 
