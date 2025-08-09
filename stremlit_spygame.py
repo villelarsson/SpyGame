@@ -4,7 +4,7 @@ import random
 st.set_page_config(page_title="Spy Game", layout="centered")
 st.title("🕵️ Spy Game")
 
-# --- SESSION STATE INIT: ALLT DEFINIERAS HÄR ---
+# --- SESSION STATE INIT ---
 if "step" not in st.session_state:
     st.session_state.step = "setup"
 if "players" not in st.session_state:
@@ -12,7 +12,6 @@ if "players" not in st.session_state:
 if "num_players" not in st.session_state:
     st.session_state.num_players = 3
 if "word_list" not in st.session_state:
-    # Inbyggd lista Göteborgsord
     st.session_state.word_list = [
         "Skansen Kronan", "Feskekôrka", "Avenyn", "Liseberg", "Göta älv",
         "Haga", "Kungsportsplatsen", "Slottsskogen", "Majorna", "Järntorget",
@@ -35,6 +34,35 @@ if "reveal_order" not in st.session_state:
     st.session_state.reveal_order = []
 if "show_role" not in st.session_state:
     st.session_state.show_role = False
+
+def start_game():
+    # Val av ord och spion
+    chosen_word = random.choice(st.session_state.word_list)
+    spy_index = random.randint(0, len(st.session_state.players) - 1)
+
+    # Tilldela roller
+    st.session_state.assignments = [
+        "Spy" if i == spy_index else chosen_word for i in range(len(st.session_state.players))
+    ]
+
+    # Skapa slumpad ordning
+    st.session_state.reveal_order = list(range(len(st.session_state.players)))
+    random.shuffle(st.session_state.reveal_order)
+
+    st.session_state.step = "reveal"
+    st.session_state.current_index = 0
+    st.session_state.show_role = False
+
+def next_player():
+    st.session_state.current_index += 1
+    st.session_state.show_role = False
+
+def restart_game():
+    # Rensa utgångsdata men behåll namn och antal spelare
+    for key in ["assignments", "current_index", "reveal_order", "show_role", "step"]:
+        if key in st.session_state:
+            del st.session_state[key]
+    st.session_state.step = "setup"
 
 # --- STEP 1: Setup ---
 if st.session_state.step == "setup":
@@ -63,23 +91,7 @@ if st.session_state.step == "setup":
         else:
             st.session_state.word_list = words
             st.session_state.players = player_names
-
-            # Välj ord och spion
-            chosen_word = random.choice(words)
-            spy_index = random.randint(0, len(player_names) - 1)
-
-            # Tilldela roller
-            st.session_state.assignments = [
-                "Spy" if i == spy_index else chosen_word for i in range(len(player_names))
-            ]
-
-            # Skapa slumpad ordning för vem som börjar se sin roll
-            st.session_state.reveal_order = list(range(len(player_names)))
-            random.shuffle(st.session_state.reveal_order)
-
-            st.session_state.step = "reveal"
-            st.session_state.current_index = 0
-            st.session_state.show_role = False
+            start_game()
             st.experimental_rerun()
 
 # --- STEP 2: Reveal roles ---
@@ -88,12 +100,7 @@ elif st.session_state.step == "reveal":
 
     if current >= len(st.session_state.players):
         st.success("✅ All players have viewed their roles.")
-        if st.button("🔁 Restart Game"):
-            # Behåll namn och antal spelare, nollställ bara spelomgångsdata
-            for key in ["assignments", "current_index", "reveal_order", "show_role", "step"]:
-                if key in st.session_state:
-                    del st.session_state[key]
-            st.session_state.step = "setup"
+        if st.button("🔁 Restart Game", on_click=restart_game):
             st.experimental_rerun()
         st.stop()
 
@@ -104,6 +111,7 @@ elif st.session_state.step == "reveal":
     if not st.session_state.show_role:
         if st.button("Reveal Role"):
             st.session_state.show_role = True
+            st.experimental_rerun()
     else:
         role = st.session_state.assignments[player_index]
         if role == "Spy":
@@ -111,7 +119,5 @@ elif st.session_state.step == "reveal":
         else:
             st.success(f"Your word is: **{role}**")
 
-        if st.button("Next Player"):
-            st.session_state.current_index += 1
-            st.session_state.show_role = False
+        if st.button("Next Player", on_click=next_player):
             st.experimental_rerun()
