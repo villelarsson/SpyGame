@@ -94,7 +94,7 @@ if start:
         st.session_state.current_index = 0
         st.session_state.show_role = False
         st.session_state.step = "reveal"
-        st.experimental_rerun()
+        st.rerun()
 
 # ---------- REVEAL ----------
 if st.session_state.step == "reveal":
@@ -105,7 +105,7 @@ if st.session_state.step == "reveal":
         st.warning("No players found — go back to setup.")
         if st.button("Back to setup"):
             st.session_state.step = "setup"
-            st.experimental_rerun()
+            st.rerun()
 
     current = st.session_state.current_index
 
@@ -124,4 +124,5 @@ if st.session_state.step == "reveal":
                 random.shuffle(st.session_state.reveal_order)
                 st.session_state.current_index = 0
                 st.session_state.show_role = False
-                st.experimental_rerun()
+                st.rerun()
+
