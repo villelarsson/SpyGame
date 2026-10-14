@@ -10,7 +10,7 @@ A small Streamlit app for playing the spy/impostor party game on one shared phon
 4. After everyone has seen their role, you play the rest of the game out loud (asking questions, voting, and so on). The app doesn't handle that part.
 5. "Restart Game" goes back to setup with the names still filled in, so you can start a new round with a new word.
 
-The word list is about 300 everyday Swedish nouns (furniture, kitchen things, clothes, tech and so on). It's hardcoded in `stremlit_spygame.py`. The interface itself is in English.
+The word list is about 220 everyday Swedish nouns (furniture, kitchen things, clothes, tech and so on). It's hardcoded in `streamlit_spygame.py`. The interface itself is in English.
 
 ## Why I built it
 
@@ -18,20 +18,17 @@ I play this game with friends and family and wanted control over the words. Apps
 
 ## How to run it
 
-You need Python 3 and Streamlit:
+You need Python 3:
 
 ```
-pip install streamlit
-streamlit run stremlit_spygame.py
+pip install -r requirements.txt
+streamlit run streamlit_spygame.py
 ```
 
-Streamlit then opens the app in your browser. To change the words, edit the `word_list` in `stremlit_spygame.py`.
+Streamlit then opens the app in your browser. To change the words, edit the `word_list` in `streamlit_spygame.py`.
 
 ## What I'd change
 
 - Move the word list into a separate file (text or JSON), so changing words doesn't mean editing code, and maybe allow several themed lists.
-- Remove duplicates from the list. "låda", "ryggsäck", "lock", "bälte" and "keps" each appear more than once, so they get picked more often. A few entries aren't really objects ("golv") or are in plural form ("slevar").
-- Fix the "Reveal Role" button. It sets the state but doesn't rerun the app, so the role only shows after a second tap.
 - Add an option for more than one spy in bigger groups.
 - Have the app pick who asks the first question.
-- Add a `requirements.txt` and fix the typo in the filename (`stremlit`). Also remove the unused `base64` import.
