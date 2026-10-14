@@ -1,6 +1,5 @@
 import streamlit as st
 import random
-import base64
 
 st.set_page_config(page_title="Spy Game", layout="centered")
 st.title("🕵️ Spy Game")
@@ -16,11 +15,11 @@ if "num_players" not in st.session_state:
     st.session_state.num_players = 3
 
 if "word_list" not in st.session_state:
-    # Hårdkodad ordlista – ca 300 vanliga svenska substantiv (föremål/saker)
+    # Hårdkodad ordlista – ca 220 vanliga svenska substantiv (föremål/saker)
     st.session_state.word_list = [
         # Transport & rörelse
         "bil", "cykel", "buss", "tåg", "spårvagn", "båt", "färja", "motorcykel",
-        "sparkcykel", "lastbil", "släp", "hjul", "däck", "ratt", "bälte",
+        "sparkcykel", "lastbil", "släp", "hjul", "däck", "ratt",
 
         # Möbler
         "bord", "stol", "soffa", "säng", "fåtölj", "pall", "bänk", "hylla",
@@ -38,7 +37,7 @@ if "word_list" not in st.session_state:
 
         # Kök – porslin & bestick
         "tallrik", "assiett", "skål", "fat", "glas", "vinglas", "mugg", "kopp",
-        "kniv", "gaffel", "sked", "tesked", "slevar", "visp", "tång",
+        "kniv", "gaffel", "sked", "tesked", "slev", "visp", "tång",
 
         # Kök – redskap
         "stekpanna", "kastrull", "lock", "skärbräda", "rivjärn", "sil",
@@ -53,7 +52,7 @@ if "word_list" not in st.session_state:
         # Städ & hushåll
         "mopp", "hink", "svabb", "trasa", "svamp", "diskmedel",
         "tvättmedel", "sköljmedel", "soppåse", "soptunna", "sopskyffel",
-        "borste", "diskborste", "handdisk", "golv",
+        "borste", "diskborste",
 
         # Badrum & hygien
         "handduk", "badhandduk", "tvål", "schampo", "balsam", "duschgel",
@@ -62,9 +61,9 @@ if "word_list" not in st.session_state:
 
         # Kläder & accessoarer
         "jacka", "kappa", "tröja", "t-shirt", "skjorta", "byxor",
-        "jeans", "kjol", "klänning", "strumpor", "skor", "stövlar",
-        "sneakers", "mössa", "keps", "hatt", "halsduk", "vantar",
-        "handskar", "bälte", "plånbok", "handväska", "ryggsäck",
+        "jeans", "kjol", "klänning", "strumpa", "sko", "stövel",
+        "sneakers", "mössa", "keps", "hatt", "halsduk", "vante",
+        "handske", "bälte", "plånbok", "handväska", "ryggsäck",
 
         # Kontor & skola
         "bok", "anteckningsbok", "tidning", "häfte", "papper",
@@ -73,20 +72,20 @@ if "word_list" not in st.session_state:
         "skrivbord", "kontorsstol", "brev", "kuvert", "stämpel",
 
         # Förvaring & material
-        "kartong", "låda", "påse", "plastpåse", "papperspåse",
-        "ryggsäck", "väska", "resväska", "necessär",
-        "plastburk", "glasburk", "lock",
+        "kartong", "påse", "plastpåse", "papperspåse",
+        "väska", "resväska", "necessär",
+        "plastburk", "glasburk",
 
         # Hem & småsaker
         "nyckel", "nyckelknippa", "fjärrkontroll", "klocka", "väckarklocka",
-        "timer", "termometer", "brandvarnare", "låda", "krok",
+        "timer", "termometer", "brandvarnare", "krok",
         "galge", "tvättnypa", "säkerhetsnål", "tejp", "sax",
         "lim", "måttband", "verktyg", "skruvmejsel", "hammare",
 
         # Ute & fritid
-        "cykelhjälm", "ryggsäck", "picknickfilt", "vattenflaska",
+        "cykelhjälm", "picknickfilt", "vattenflaska",
         "termos", "grill", "tändare", "ficklampa",
-        "paraply", "regnjacka", "solglasögon", "keps",
+        "paraply", "regnjacka", "solglasögon",
 
         # Övrigt vardagligt
         "matta", "gardin", "kudde", "täcke", "lakan",
@@ -162,6 +161,7 @@ elif st.session_state.step == "reveal":
     if not st.session_state.show_role:
         if st.button("Reveal Role"):
             st.session_state.show_role = True
+            st.rerun()
     else:
         role = st.session_state.assignments[player_index]
         if role == "Spy":
